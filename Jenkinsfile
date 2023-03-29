@@ -21,8 +21,10 @@ pipeline {
          
         stage('Build docker image') {
            steps {
-               script {         
+               script {
+				 docker login				 
                  def customImage = docker.build('buzz83sg76/cloudfreak', "./docker")
+				 docker tag spring-petclinic baowow/petclinic:latest
                  docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                  customImage.push("${env.BUILD_NUMBER}")
                  }                     

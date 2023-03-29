@@ -23,7 +23,7 @@ pipeline {
            steps {
                script {						 
                  def customImage = docker.build('buzz83sg76/cloudfreak', "./docker")
-				 customImage.tag('buzz83sg76/petclinic:latest')				 
+				 customImage.tag(latest)				 
                  docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                  customImage.push("${env.BUILD_NUMBER}")
                  }                     
